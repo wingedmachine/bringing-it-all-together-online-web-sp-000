@@ -19,7 +19,7 @@ class Dog
 
   def self.create(hash)
     dog = Dog.new(hash)
-    dog.saves
+    dog.save
   end
 
   def self.create_table
