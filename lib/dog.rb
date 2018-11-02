@@ -42,10 +42,10 @@ class Dog
     find = <<-SQL
       SELECT *
       FROM dogs
-      WHERE ? = ?
+      WHERE #{col_name} = ?
     SQL
 
-    row = DB[:conn].execute(find, col_name, value).first
+    row = DB[:conn].execute(find, value).first
     binding.pry
     Dog.new_from_db(row)
   end
