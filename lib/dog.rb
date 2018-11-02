@@ -7,6 +7,16 @@ class Dog
     @breed = breed
   end
 
+  def save
+    save = <<-SQL
+      INSERT INTO dogs (name, breed) VALUES (?, ?)
+    SQL
+
+    DB[:conn].execute(save, name, breed)
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
+    self
+  end
+
   def self.create_table
     create = <<-SQL
       CREATE TABLE dogs (
