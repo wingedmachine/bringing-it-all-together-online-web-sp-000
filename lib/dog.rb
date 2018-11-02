@@ -26,7 +26,7 @@ class Dog
     SQL
 
     row = DB[:conn].execute(find, hash[:name], hash[:breed]).first
-    if !row.empty?
+    if !row.nil?
       Dog.create_from_row(row)
     else
       Dog.create(hash)
