@@ -38,15 +38,23 @@ class Dog
     dog.save
   end
 
-  def self.find_by_id(id)
+  def self.find_by_col(col_name, value)
     find = <<-SQL
       SELECT *
       FROM dogs
-      WHERE id = ?
+      WHERE ? = ?
     SQL
 
-    row = DB[:conn].execute(find, id).first
+    row = DB[:conn].execute(find, col_name, value).first
     Dog.new_from_db(row)
+  end
+
+  def self.find_by_id(id)
+    self.find_by_col("id", id)
+  end
+
+  def self.find_by_name(name)
+    self.find_by_col("name", id)
   end
 
   def self.new_from_db(row)
