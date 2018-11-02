@@ -46,6 +46,7 @@ class Dog
     SQL
 
     row = DB[:conn].execute(find, col_name, value).first
+    binding.pry
     Dog.new_from_db(row)
   end
 
