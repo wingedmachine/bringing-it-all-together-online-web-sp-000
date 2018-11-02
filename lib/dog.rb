@@ -17,7 +17,7 @@ class Dog
     self
   end
 
-  def self.find_or_create_by(name:, breed:)
+  def self.find_or_create_by(hash)
     find = <<-SQL
       SELECT *
       FROM dogs
@@ -25,11 +25,11 @@ class Dog
         AND breed = ?
     SQL
 
-    row = DB[:conn].execute(find, name, breed)
+    row = DB[:conn].execute(find, hash[:name], hash[:breed])
     if !row.empty?
       Dog.create_from_row(row)
     else
-      Dog.create({ name: name, breed: breed })
+      Dog.create(hash)
     end
   end
 
