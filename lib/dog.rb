@@ -17,6 +17,22 @@ class Dog
     self
   end
 
+  def self.find_or_create_by(name, breed)
+    find = <<-SQL
+      SELECT *
+      FROM dogs
+      WHERE name = ?
+        AND breed = ?
+    SQL
+
+    row = DB[:conn].execute(find, name, breed)
+    if !row.empty?
+      Dog.create_from_row(row)
+    else
+      Dog.create({ name: name, breed: breed })
+    end
+  end
+
   def self.create(hash)
     dog = Dog.new(hash)
     dog.save
@@ -30,6 +46,10 @@ class Dog
     SQL
 
     row = DB[:conn].execute(find, id).first
+    Dog.create_from_row(row)
+  end
+
+  def self.create_from_row(row)
     Dog.new({ name: row[1], breed: row[2], id: row[0] })
   end
 
