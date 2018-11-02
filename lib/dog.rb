@@ -16,7 +16,7 @@ class Dog
       )
     SQL
 
-    DB[:conn].execute(sql)
+    DB[:conn].execute(create)
   end
 
   def self.drop_table
@@ -24,6 +24,6 @@ class Dog
       DROP TABLE doggs
     SQL
 
-    DB[:conn].execute(sql)
+    DB[:conn].execute(drop)
   end
 end
