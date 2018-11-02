@@ -22,7 +22,7 @@ class Dog
     update = <<-SQL
       UPDATE dogs
       SET name = ?,
-          breed = ?,
+          breed = ?
       WHERE id = ?
     SQL
 
