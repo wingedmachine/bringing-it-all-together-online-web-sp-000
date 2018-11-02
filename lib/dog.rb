@@ -17,6 +17,11 @@ class Dog
     self
   end
 
+  def self.create(hash)
+    dog = Dog.new(hash)
+    dog.saves
+  end
+
   def self.create_table
     create = <<-SQL
       CREATE TABLE dogs (
