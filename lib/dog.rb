@@ -27,7 +27,7 @@ class Dog
 
     row = DB[:conn].execute(find, hash[:name], hash[:breed]).first
     if !row.nil?
-      Dog.create_from_row(row)
+      Dog.new_from_db(row)
     else
       Dog.create(hash)
     end
@@ -46,10 +46,10 @@ class Dog
     SQL
 
     row = DB[:conn].execute(find, id).first
-    Dog.create_from_row(row)
+    Dog.new_from_db(row)
   end
 
-  def self.create_from_row(row)
+  def self.new_from_db(row)
     Dog.new({ name: row[1], breed: row[2], id: row[0] })
   end
 
