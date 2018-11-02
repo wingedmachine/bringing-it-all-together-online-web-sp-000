@@ -30,7 +30,7 @@ class Dog
     SQL
 
     row = DB[:conn].execute(find, id).first
-    Dog.new({ name: row[1], breed: [row[2], id: row[0] })
+    Dog.new({ name: row[1], breed: row[2], id: row[0] })
   end
 
   def self.create_table
