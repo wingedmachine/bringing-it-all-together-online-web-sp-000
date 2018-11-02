@@ -17,6 +17,17 @@ class Dog
     self
   end
 
+  def update
+    update = <<-SQL
+      UPDATE dogs
+      SET name = ?
+          breed = ?
+      WHERE id = ?
+    SQL
+
+    DB[:conn].execute(update, name, breed, id)
+  end
+
   def self.find_or_create_by(hash)
     find = <<-SQL
       SELECT *
