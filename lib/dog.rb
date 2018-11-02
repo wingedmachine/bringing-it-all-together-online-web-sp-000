@@ -29,7 +29,8 @@ class Dog
       WHERE id = ?
     SQL
 
-    DB[:conn].execute(find, id)
+    row = DB[:conn].execute(find, id).first
+    Dog.new({ name: row[1], breed: [row[2], id: row[0] })
   end
 
   def self.create_table
